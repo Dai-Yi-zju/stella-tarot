@@ -69,7 +69,7 @@ flowchart LR
 需要 Python 3.10+ 和一个 [OpenAI API Key](https://platform.openai.com/api-keys)（API 需要单独充值，与 ChatGPT 会员无关）。
 
 ```bash
-git clone https://github.com/<你的用户名>/stella-tarot.git
+git clone https://github.com/Dai-Yi-zju/stella-tarot.git
 cd stella-tarot
 python -m venv .venv
 .venv\Scripts\activate          # macOS / Linux: source .venv/bin/activate
