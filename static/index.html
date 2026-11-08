@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>星语塔罗</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<canvas id="sky"></canvas>
+
+<header class="hero">
+  <h1>星语塔罗</h1>
+  <p class="sub">STELLA · TAROT</p>
+  <div id="mockBadge" class="mock-badge" hidden>mock 模式 · 未调用 GPT</div>
+</header>
+
+<main class="wrap">
+  <section id="ask" class="panel">
+    <label class="q" for="question">默念你心中的问题</label>
+    <div class="ornament">✦ ✧ ✦</div>
+    <textarea id="question" rows="3" maxlength="500" placeholder="例如：我该如何看待接下来的求职机会？"></textarea>
+    <div class="chips">
+      <button class="chip" type="button">这段感情接下来会怎样发展？</button>
+      <button class="chip" type="button">下周的面试我需要注意什么？</button>
+      <button class="chip" type="button">两个 offer，大厂还是创业公司？</button>
+      <button class="chip" type="button">怎样让家里的关系更和睦？</button>
+      <button class="chip" type="button">今天的指引是什么？</button>
+    </div>
+    <div class="code-row" id="codeRow" hidden>
+      <label for="accessCode">访问口令</label>
+      <input type="text" id="accessCode" maxlength="100" autocomplete="off" placeholder="向分享者索取">
+    </div>
+    <div class="row">
+      <label class="toggle"><input type="checkbox" id="useRev" checked> 启用逆位</label>
+      <button class="btn" id="startBtn" type="button">开始占卜</button>
+    </div>
+    <p class="disclaimer">塔罗是自我反思的工具，结果仅供参考。　<a href="/gallery">牌面图鉴</a></p>
+  </section>
+
+  <section id="table" aria-live="polite">
+    <div class="question-echo" id="qEcho"></div>
+    <div class="spread-name" id="spreadName"></div>
+    <div id="narr"></div>
+    <div id="stage"></div>
+    <div class="oracle" id="oracle">
+      <svg viewBox="0 0 200 200" aria-hidden="true">
+        <circle cx="100" cy="100" r="90" fill="none" stroke="#c9973a" stroke-width="1.2"/>
+        <circle cx="100" cy="100" r="80" fill="none" stroke="#c9973a" stroke-width=".8" stroke-dasharray="2 4"/>
+        <polygon id="oracleStar" fill="none" stroke="#ecd08a" stroke-width="1.5"/>
+        <circle cx="100" cy="100" r="16" fill="#1b1540" stroke="#ecd08a" stroke-width="1.5"/>
+        <circle cx="100" cy="100" r="5" fill="#ecd08a"/>
+      </svg>
+      <div class="msg" id="oracleMsg"></div>
+    </div>
+  </section>
+
+  <section id="results"></section>
+</main>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true">
+  <div><div class="big" id="modalCard"></div><div class="cap" id="modalCap"></div></div>
+</div>
+<div class="toast" id="toast" role="alert"></div>
+
+<script src="/static/cards.js"></script>
+<script src="/static/sky.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>

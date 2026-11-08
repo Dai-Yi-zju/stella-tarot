@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>星语塔罗 · 牌面图鉴</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+<style>
+  .gallery { max-width: 1200px; margin: 0 auto; padding: 24px 16px 60px; }
+  .gallery h2 { font-family: var(--font-callig); color: var(--gold-l); font-size: 30px; font-weight: 400; margin: 32px 0 14px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 18px; }
+  .item { text-align: center; }
+  .item .tarot-svg { width: 100%; height: auto; display: block; border-radius: 10px; box-shadow: 0 6px 18px rgba(0,0,0,.45); }
+  .item p { margin: 6px 0 0; font-size: 12px; color: var(--muted); line-height: 1.5; }
+</style>
+</head>
+<body>
+<canvas id="sky"></canvas>
+<main class="gallery">
+  <header class="hero"><h1>牌面图鉴</h1><p class="sub">七十八张牌 · 正位与逆位牌义　<a href="/">← 返回占卜</a></p></header>
+  <div id="sections"></div>
+</main>
+<script src="/static/cards.js"></script>
+<script src="/static/sky.js"></script>
+<script>
+  TarotArt.install();
+  fetch("/api/deck").then(r => r.json()).then(deck => {
+    const groups = [["大阿尔卡那", deck.slice(0, 22)], ["权杖 · 火", deck.slice(22, 36)], ["圣杯 · 水", deck.slice(36, 50)],
+                    ["宝剑 · 风", deck.slice(50, 64)], ["星币 · 土", deck.slice(64, 78)]];
+    document.getElementById("sections").innerHTML = groups.map(([t, cards]) =>
+      `<h2>${t}</h2><div class="grid">${cards.map(c =>
+        `<div class="item">${TarotArt.face(c)}<p><b>正</b> ${c.upright}<br><b>逆</b> ${c.reversed}</p></div>`).join("")}</div>`).join("");
+  });
+</script>
+</body>
+</html>
